@@ -1,6 +1,5 @@
 package main.com.adventure;
 
-
 import main.com.adventure.settings.Command;
 import main.com.adventure.settings.CommandConstants;
 
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 public class GameInputProcessor {
     private static final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    private String input;
+ Scanner input = new Scanner(System.in);
 
 
     /**
@@ -18,9 +17,11 @@ public class GameInputProcessor {
      * @return the response from the user.
      */
     public String prompt() {
-        System.out.println("Enter your next command:");
-        String line = scanner.nextLine();
-        return line;
+		Scanner scanner = new java.util.Scanner( System.in );
+		System.out.print("Enter command: ");
+		String other = scanner.nextLine();
+        System.out.println(" ");
+        return other;
     }
 
     /**
@@ -36,13 +37,13 @@ public class GameInputProcessor {
      * @return - the Command object with the proper verb and blank object
      */
     private Command buildSimpleCommand(String input) {
-        this.input = input;
-
-        input = input.substring(0, input.indexOf(' '));
-        Command command = new Command(input);
 
 
-        return command;
+        String verb = java.util.Arrays.toString( input.split( " " ) );
+		String objectName = java.util.Arrays.toString( input.split( "," ) );
+
+
+        return new Command(verb, objectName);
     }
 
     /**
@@ -65,16 +66,14 @@ public class GameInputProcessor {
      * @return - the Command object with the proper verb and object
      */
     private Command buildCommandWithObject(String input) {
-        if (input.split(" ").length > 1){
+        if (input.split(" ").length > 1) {
             String firstWord = input.split(" ") [0];
             String secondWord = input.split(" ") [1];
-            Command command = new Command(firstWord, secondWord);
-            return command;
+            return new Command(firstWord, secondWord);
 
         } else {
-            input = input.trim();
-            Command command = new Command(input);
-            return command;
+            String sand = input.trim();
+            return new Command(sand);
 
         }
     }
