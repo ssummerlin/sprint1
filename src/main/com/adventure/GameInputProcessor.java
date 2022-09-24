@@ -38,10 +38,11 @@ public class GameInputProcessor {
     private Command buildSimpleCommand(String input) {
 
 
-        String temp = input.substring(0, input.indexOf(' '));
+        String verb = java.util.Arrays.toString( input.split( " " ) );
+		String objectName = java.util.Arrays.toString( input.split( "," ) );
 
 
-        return new Command(temp);
+        return new Command(verb, objectName);
     }
 
     /**
